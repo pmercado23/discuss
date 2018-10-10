@@ -6,14 +6,15 @@ For local DB, this app is using postgresql
 
 Inside `config/dev.exs`
 
-```config :discuss, Discuss.Repo,
+```
+config :discuss, Discuss.Repo,
      adapter: Ecto.Adapters.Postgres,
      username: #update user name for local user.,
      password: "postgres",
      database: "discuss_dev",
      hostname: "localhost",
      pool_size: 10
-     ```
+```
 
 To start your Phoenix app:
 
