@@ -7,6 +7,7 @@ defmodule Discuss.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Discuss.Plugs.SetUser
   end
 
   pipeline :api do
@@ -24,6 +25,13 @@ defmodule Discuss.Router do
     #delete "/topics/:id", TopicController, :delete
     # resources replaces the code above and helps direct requests
     resources "/topics", TopicController
+  end
+
+  scope "/auth", Discuss do
+    pipe_through :browser
+    get "/signout", AuthController, :signout
+    get "/:provider", AuthController, :request #defined by Auth automatically
+    get "/:provider/callback", AuthController, :callback
   end
 
 
